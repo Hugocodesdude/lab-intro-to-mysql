@@ -5,7 +5,8 @@ USE lab_mysql;
 --  CREATE CARS TABLE
 
 CREATE TABLE cars (
-VIN VARCHAR(40) UNIQUE PRIMARY KEY,
+ID1 INT PRIMARY KEY,
+VIN VARCHAR(40),
 manufacturer VARCHAR(40) NOT NULL,
 model VARCHAR(40) NOT NULL,
 year INT,
@@ -13,7 +14,8 @@ colour VARCHAR(40) NOT NULL
 );
 
 CREATE TABLE customers (
-customer_id INT UNIQUE PRIMARY KEY,
+ID2 INT PRIMARY KEY,
+customer_id INT,
 name VARCHAR(40) NOT NULL,
 phone_number VARCHAR(40) NOT NULL,
 email VARCHAR(40) NOT NULL,
@@ -25,30 +27,32 @@ post_code VARCHAR(40)
 );
 
 CREATE TABLE salesperson (
-staff_id INT UNIQUE PRIMARY KEY,
+ID3 INT PRIMARY KEY,
+staff_id INT,
 name VARCHAR(40) NOT NULL,
 company_store VARCHAR(40) NOT NULL
 );
 
 CREATE TABLE invoices (
-invoice_number INT UNIQUE PRIMARY KEY, 
+ID4 INT PRIMARY KEY,
+invoice_number INT, 
 date DATE,
-cars VARCHAR(40),
+cars INT,
 customers INT,
 salesperson INT
 );
 
 ALTER TABLE invoices 
 ADD FOREIGN KEY (cars) 
-REFERENCES cars(VIN) 
+REFERENCES cars(ID1) 
 ON DELETE CASCADE;
 
 ALTER TABLE invoices 
 ADD FOREIGN KEY (customers) 
-REFERENCES customers(customer_id) 
+REFERENCES customers(ID2) 
 ON DELETE CASCADE;
 
 ALTER TABLE invoices 
 ADD FOREIGN KEY (salesperson) 
-REFERENCES salesperson(staff_id) 
+REFERENCES salesperson(ID3) 
 ON DELETE CASCADE;
